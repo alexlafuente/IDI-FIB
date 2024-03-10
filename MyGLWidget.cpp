@@ -25,7 +25,7 @@ void MyGLWidget::initializeGL ()
 }
 
 
-void MyGLWidget::modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala)
+void MyGLWidget::modelTransformCos(glm::vec3 posicio, glm::vec3 escala)
 {
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG,posicio);  
@@ -33,15 +33,27 @@ void MyGLWidget::modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala)
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
+void MyGLWidget::modelTransformCano(glm::vec3 posicio, glm::vec3 escala)
+{
+  glm::mat4 TG(1.0f);
+  TG = glm::translate(TG,posicio);
+  TG = glm::scale(TG,escala);
+  glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
 void MyGLWidget::pintaTanc()
 {
   glBindVertexArray(VAOCos);
-  modelTransformQuadrat(glm::vec3(0.0), glm::vec3(1.0));
+  modelTransformCos(glm::vec3(0.0), glm::vec3(1.0));;
+  glm::vec4 bodyColor = glm::vec4(verd, 1);
+  glUniform4fv(ColorLoc, 1, &bodyColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 12);
   glBindVertexArray(0);
 
   glBindVertexArray(VAOCano);
-  modelTransformQuadrat(glm::vec3(0.0), glm::vec3(1.0));
+  modelTransformCano(glm::vec3(0.0), glm::vec3(1.0));
+  glm::vec4 cannonColor = glm::vec4(gris, 1);
+  glUniform4fv(ColorLoc, 1, &cannonColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 9);
   glBindVertexArray(0);
 }
@@ -131,9 +143,6 @@ void MyGLWidget::creaBuffersCos ()
   glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(vertexLoc);
 
-  glm::vec4 bodyColor = glm::vec4(verd, 1);
-  glUniform4fv(CosColorLoc, 1, &bodyColor[0]);
-
   // Desactivem el VAO
   glBindVertexArray(0);
 
@@ -149,7 +158,8 @@ void MyGLWidget::creaBuffersCos ()
   // glBindVertexArray(0);
 }
 
-void MyGLWidget::creaBuffersCano() {
+void MyGLWidget::creaBuffersCano()
+{
   glm::vec3 VerticesCano[9];  // vèrtexs amb X, Y i Z
 
   // minX = -1.0
@@ -181,8 +191,8 @@ void MyGLWidget::creaBuffersCano() {
   glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(vertexLoc);
 
-  glm::vec4 bodyColor = glm::vec4(gris, 1);
-  glUniform4fv(CosColorLoc, 1, &bodyColor[0]);
+  // glm::vec4 bodyColor = glm::vec4(gris, 1);
+  // glUniform4fv(ColorLoc, 1, &bodyColor[0]);
 
   // Desactivem el VAO
   glBindVertexArray(0);
@@ -213,5 +223,5 @@ void MyGLWidget::carregaShaders()
   // Obtenim els identificadors dels uniforms
   TGLoc = glGetUniformLocation(program->programId(), "TG"); 
 
-  CosColorLoc = glGetUniformLocation(program->programId(), "CosColor");
+  ColorLoc = glGetUniformLocation(program->programId(), "TancColor");
 }

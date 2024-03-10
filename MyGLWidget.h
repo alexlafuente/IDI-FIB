@@ -37,7 +37,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     
     void carregaShaders();
     
-    void modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala);
+    void modelTransformCos(glm::vec3 posicio, glm::vec3 escala);
+
+    void modelTransformCano(glm::vec3 posicio, glm::vec3 escala);
 
     void pintaCos();
 
@@ -53,7 +55,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     GLuint vertexLoc;
     // uniform locations
     GLuint TGLoc;
-    GLuint CosColorLoc;
+    GLuint ColorLoc;
 
     // VAOs
     GLuint VAOQuadrat;
@@ -68,4 +70,5 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec3 verd = glm::vec3(0.0,0.6,0.0);
     glm::vec3 negre = glm::vec3(0.0);    
     glm::vec3 gris = glm::vec3(0.5,0.5,0.5);
+
 };
