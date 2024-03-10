@@ -76,6 +76,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec3 gris = glm::vec3(0.5,0.5,0.5);
 
     float moureRoda = 0.0;
+    float movx = 0.0;
+    float angleRoda = 0.0;
 
     QVector<float> posRoda = {-0.375, -0.125, 0.125, 0.375};
 

@@ -45,9 +45,10 @@ void MyGLWidget::modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala)
 void MyGLWidget::modelTransformQuadratRoda(int i, int j)
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG, glm::vec3(posRoda[i],0.0,0.0));
+  TG = glm::translate(TG, glm::vec3(posRoda[i]+movx,0.0,0.0));
   TG = glm::translate(TG, glm::vec3(0.0,-0.125,0.0));
   TG = glm::rotate(TG, float(M_PI*j/6), glm::vec3(0.0,0.0,1.0));
+  TG = glm::rotate(TG, angleRoda, glm::vec3(0.0,0.0,0.1));
   TG = glm::scale(TG, glm::vec3(1.0f));
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -129,8 +130,12 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Right: 
     	break;
     case Qt::Key_A: 
+      movx -= 0.01;
+      angleRoda -= M_PI/180;
     	break;
-    case Qt::Key_D: 
+    case Qt::Key_D:
+      movx += 0.01;
+      angleRoda += M_PI/180;
     	break;		
     default: event->ignore(); break;
   }
