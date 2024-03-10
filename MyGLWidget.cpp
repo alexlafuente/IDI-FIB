@@ -47,7 +47,7 @@ void MyGLWidget::modelTransformQuadratRoda(int i, int j)
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG, glm::vec3(posRoda[i],0.0,0.0));
   TG = glm::translate(TG, glm::vec3(0.0,-0.125,0.0));
-  TG = glm::rotate(TG, float(M_PI*j/4), glm::vec3(0.0,0.0,1.0));
+  TG = glm::rotate(TG, float(M_PI*j/6), glm::vec3(0.0,0.0,1.0));
   TG = glm::scale(TG, glm::vec3(1.0f));
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
