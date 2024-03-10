@@ -34,6 +34,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void creaBuffersCos();
 
     void creaBuffersCano();
+
+    void creaBuffersRoda();
     
     void carregaShaders();
     
@@ -41,7 +43,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 
     void modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala);
 
-    void modelTransformQuadratRoda(glm::vec3 posicio, glm::vec3 escala);
+    void modelTransformQuadratRoda(int i, int j);
 
     void pintaCos();
 
@@ -72,5 +74,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     glm::vec3 verd = glm::vec3(0.0,0.6,0.0);
     glm::vec3 negre = glm::vec3(0.0);    
     glm::vec3 gris = glm::vec3(0.5,0.5,0.5);
+
+    float moureRoda = 0.0;
+
+    QVector<float> posRoda = {-0.375, -0.125, 0.125, 0.375};
 
 };

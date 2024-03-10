@@ -22,6 +22,7 @@ void MyGLWidget::initializeGL ()
   carregaShaders();
   creaBuffersCos();
   creaBuffersCano();
+  creaBuffersRoda();
 }
 
 
@@ -41,11 +42,13 @@ void MyGLWidget::modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala)
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
-void MyGLWidget::modelTransformQuadratRoda(glm::vec3 posicio, glm::vec3 escala)
+void MyGLWidget::modelTransformQuadratRoda(int i, int j)
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG,posicio);
-  TG = glm::scale(TG,escala);
+  TG = glm::translate(TG, glm::vec3(posRoda[i],0.0,0.0));
+  TG = glm::translate(TG, glm::vec3(0.0,-0.125,0.0));
+  TG = glm::rotate(TG, float(M_PI*j/4), glm::vec3(0.0,0.0,1.0));
+  TG = glm::scale(TG, glm::vec3(1.0f));
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
@@ -63,6 +66,24 @@ void MyGLWidget::pintaTanc()
   glm::vec4 cannonColor = glm::vec4(gris, 1);
   glUniform4fv(ColorLoc, 1, &cannonColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 9);
+  glBindVertexArray(0);
+
+  glBindVertexArray(VAORoda);
+  for (int i = 0; i < 4; ++i) {
+    bool paintBlack = true;
+    for (int j = 0; j < 12; ++j) {
+      modelTransformQuadratRoda(i, j);
+      if (paintBlack) {
+        glUniform4f(ColorLoc, negre.r, negre.g, negre.b, 1.0f);
+      }
+      else {
+        glUniform4f(ColorLoc, gris.r, gris.g, gris.b, 1.0f);
+      }
+      glDrawArrays(GL_TRIANGLES, 0, 9);
+      paintBlack = not paintBlack;
+    }
+  }
+  // glDrawArrays(GL_TRIANGLES, 0, 9);
   glBindVertexArray(0);
 }
 
@@ -196,6 +217,41 @@ void MyGLWidget::creaBuffersCano()
   glGenBuffers(1, &VBOCano);
   glBindBuffer(GL_ARRAY_BUFFER, VBOCano);
   glBufferData(GL_ARRAY_BUFFER, sizeof(VerticesCano), VerticesCano, GL_STATIC_DRAW);
+  glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+  glEnableVertexAttribArray(vertexLoc);
+
+  // glm::vec4 bodyColor = glm::vec4(gris, 1);
+  // glUniform4fv(ColorLoc, 1, &bodyColor[0]);
+
+  // Desactivem el VAO
+  glBindVertexArray(0);
+}
+
+void MyGLWidget::creaBuffersRoda()
+{
+  glm::vec3 VerticesRectangle[9];
+
+  VerticesRectangle[0] = glm::vec3(0-0.1-(0.1/2), -(0.05/2), 0);
+  VerticesRectangle[1] = glm::vec3(0-0.1-(0.1/2), 0.05/2, 0);
+  VerticesRectangle[2] = glm::vec3(0-0.1, -(0.05/2), 0);
+
+  VerticesRectangle[3] = glm::vec3(0-0.1+(0.1/2), -(0.05/2), 0);
+  VerticesRectangle[4] = glm::vec3(0-0.1+(0.1/2), 0.05/2, 0);
+  VerticesRectangle[5] = glm::vec3(0-0.1, -(0.05/2), 0);
+
+  VerticesRectangle[6] = glm::vec3(0-0.1-(0.1/2), 0.05/2, 0);
+  VerticesRectangle[7] = glm::vec3(0-0.1+(0.1/2), 0.05/2, 0);
+  VerticesRectangle[8] = glm::vec3(0-0.1, -(0.05/2), 0);
+
+  // Creació del Vertex Array Object (VAO) que usarem per pintar el quadrat
+  glGenVertexArrays(1, &VAORoda);
+  glBindVertexArray(VAORoda);
+
+  // Creació del buffer amb les posicions dels vèrtexs
+  GLuint VBORoda;
+  glGenBuffers(1, &VBORoda);
+  glBindBuffer(GL_ARRAY_BUFFER, VBORoda);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(VerticesRectangle), VerticesRectangle, GL_STATIC_DRAW);
   glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(vertexLoc);
 
