@@ -25,7 +25,7 @@ void MyGLWidget::initializeGL ()
 }
 
 
-void MyGLWidget::modelTransformCos(glm::vec3 posicio, glm::vec3 escala)
+void MyGLWidget::modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala)
 {
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG,posicio);  
@@ -33,7 +33,15 @@ void MyGLWidget::modelTransformCos(glm::vec3 posicio, glm::vec3 escala)
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
-void MyGLWidget::modelTransformCano(glm::vec3 posicio, glm::vec3 escala)
+void MyGLWidget::modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala)
+{
+  glm::mat4 TG(1.0f);
+  TG = glm::translate(TG,posicio);
+  TG = glm::scale(TG,escala);
+  glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::modelTransformQuadratRoda(glm::vec3 posicio, glm::vec3 escala)
 {
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG,posicio);
@@ -44,14 +52,14 @@ void MyGLWidget::modelTransformCano(glm::vec3 posicio, glm::vec3 escala)
 void MyGLWidget::pintaTanc()
 {
   glBindVertexArray(VAOCos);
-  modelTransformCos(glm::vec3(0.0), glm::vec3(1.0));;
+  modelTransformQuadrat(glm::vec3(0.0), glm::vec3(1.0));;
   glm::vec4 bodyColor = glm::vec4(verd, 1);
   glUniform4fv(ColorLoc, 1, &bodyColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 12);
   glBindVertexArray(0);
 
   glBindVertexArray(VAOCano);
-  modelTransformCano(glm::vec3(0.0), glm::vec3(1.0));
+  modelTransformQuadratCano(glm::vec3(0.0), glm::vec3(1.0));
   glm::vec4 cannonColor = glm::vec4(gris, 1);
   glUniform4fv(ColorLoc, 1, &cannonColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 9);

@@ -37,9 +37,11 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     
     void carregaShaders();
     
-    void modelTransformCos(glm::vec3 posicio, glm::vec3 escala);
+    void modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala);
 
-    void modelTransformCano(glm::vec3 posicio, glm::vec3 escala);
+    void modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala);
+
+    void modelTransformQuadratRoda(glm::vec3 posicio, glm::vec3 escala);
 
     void pintaCos();
 
