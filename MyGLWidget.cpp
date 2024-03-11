@@ -126,18 +126,18 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
       }
     	break;
     case Qt::Key_Right: 
-      if (angleCano - M_PI/18 >= -0.00001) {
+      if (angleCano - M_PI/18 >= -0.0000001) {
         angleCano -= M_PI / 18;
       }
     	break;
     case Qt::Key_A: 
       movx -= 0.01;
-      angleRoda -= M_PI/180;
+      angleRoda += M_PI/180;
       pivotCano.x -= 0.01;
     	break;
     case Qt::Key_D:
       movx += 0.01;
-      angleRoda += M_PI/180;
+      angleRoda -= M_PI/180;
       pivotCano.x += 0.01;
     	break;		
     default: event->ignore(); break;
