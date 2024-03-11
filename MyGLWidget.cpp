@@ -100,14 +100,6 @@ void MyGLWidget::paintGL ()
   glClear (GL_COLOR_BUFFER_BIT);  // Esborrem el frame-buffer
   // Pintem tanc
   pintaTanc();
-  // // Pintem un quadrat
-  // glBindVertexArray(VAOQuadrat);
-  // modelTransformQuadrat(glm::vec3(0.0), glm::vec3(1.0));
-  // glDrawArrays(GL_TRIANGLES, 0, 6);
-  // glBindVertexArray(0);
-
-  // Desactivem el VAO
-  // glBindVertexArray(0);
 }
 
 void MyGLWidget::resizeGL (int w, int h)
@@ -190,17 +182,6 @@ void MyGLWidget::creaBuffersCos ()
 
   // Desactivem el VAO
   glBindVertexArray(0);
-
-  // // Creació del buffer amb les posicions dels vèrtexs
-  // GLuint VBO;
-  // glGenBuffers(1, &VBO);
-  // glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  // glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-  // glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-  // glEnableVertexAttribArray(vertexLoc);
-
-  // // Desactivem el VAO
-  // glBindVertexArray(0);
 }
 
 void MyGLWidget::creaBuffersCano()
@@ -236,9 +217,6 @@ void MyGLWidget::creaBuffersCano()
   glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(vertexLoc);
 
-  // glm::vec4 bodyColor = glm::vec4(gris, 1);
-  // glUniform4fv(ColorLoc, 1, &bodyColor[0]);
-
   // Desactivem el VAO
   glBindVertexArray(0);
 }
@@ -270,9 +248,6 @@ void MyGLWidget::creaBuffersRoda()
   glBufferData(GL_ARRAY_BUFFER, sizeof(VerticesRectangle), VerticesRectangle, GL_STATIC_DRAW);
   glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(vertexLoc);
-
-  // glm::vec4 bodyColor = glm::vec4(gris, 1);
-  // glUniform4fv(ColorLoc, 1, &bodyColor[0]);
 
   // Desactivem el VAO
   glBindVertexArray(0);
