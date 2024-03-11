@@ -29,15 +29,18 @@ void MyGLWidget::initializeGL ()
 void MyGLWidget::modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala)
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG,posicio);  
+  TG = glm::translate(TG, glm::vec3(posicio.x + movx, posicio.y, posicio.z));
   TG = glm::scale(TG,escala);
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
-void MyGLWidget::modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala)
+void MyGLWidget::modelTransformQuadratCano(glm::vec3 escala)
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG,posicio);
+  TG = glm::translate(TG, pivotCano);
+  TG = glm::rotate(TG, angleCano, glm::vec3(0.0,0.0,1.0));
+  TG = glm::translate(TG, glm::vec3(-pivotCano.x, -pivotCano.y, -pivotCano.z));
+  TG = glm::translate(TG, glm::vec3(movx, 0.0, 0.0));
   TG = glm::scale(TG,escala);
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -45,11 +48,11 @@ void MyGLWidget::modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala)
 void MyGLWidget::modelTransformQuadratRoda(int i, int j)
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG, glm::vec3(posRoda[i]+movx,0.0,0.0));
-  TG = glm::translate(TG, glm::vec3(0.0,-0.125,0.0));
-  TG = glm::rotate(TG, float(M_PI*j/6), glm::vec3(0.0,0.0,1.0));
-  TG = glm::rotate(TG, angleRoda, glm::vec3(0.0,0.0,0.1));
-  TG = glm::scale(TG, glm::vec3(1.0f));
+  TG = glm::translate(TG, glm::vec3(posRoda[i]+movx,0.0,0.0)); // Moviment relatiu al centre de la roda
+  TG = glm::translate(TG, glm::vec3(0.0,-0.125,0.0)); // Moviment respecte a la distància entre el rectangle i la roda en l'eix vertical
+  TG = glm::rotate(TG, float(M_PI*j/6), glm::vec3(0.0,0.0,1.0)); // Rotació corresponent a cada rectangle, de manera que el 6è rectangle estigui a 180º i el 12è a 330º
+  TG = glm::rotate(TG, angleRoda, glm::vec3(0.0,0.0,1.0)); // Rotació de la roda respecte l'eix z per l'animació de la roda
+  TG = glm::scale(TG, glm::vec3(1.0f)); //
   glUniformMatrix4fv(TGLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
@@ -63,7 +66,7 @@ void MyGLWidget::pintaTanc()
   glBindVertexArray(0);
 
   glBindVertexArray(VAOCano);
-  modelTransformQuadratCano(glm::vec3(0.0), glm::vec3(1.0));
+  modelTransformQuadratCano(glm::vec3(1.0));
   glm::vec4 cannonColor = glm::vec4(gris, 1);
   glUniform4fv(ColorLoc, 1, &cannonColor[0]);
   glDrawArrays(GL_TRIANGLES, 0, 9);
@@ -126,16 +129,24 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
   makeCurrent();
   switch (event->key()) {
     case Qt::Key_Left: 
+      if (angleCano + M_PI/18 <= M_PI) {
+        angleCano += M_PI / 18;
+      }
     	break;
     case Qt::Key_Right: 
+      if (angleCano - M_PI/18 >= -0.00001) {
+        angleCano -= M_PI / 18;
+      }
     	break;
     case Qt::Key_A: 
       movx -= 0.01;
       angleRoda -= M_PI/180;
+      pivotCano.x -= 0.01;
     	break;
     case Qt::Key_D:
       movx += 0.01;
       angleRoda += M_PI/180;
+      pivotCano.x += 0.01;
     	break;		
     default: event->ignore(); break;
   }

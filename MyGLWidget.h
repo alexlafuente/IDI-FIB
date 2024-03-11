@@ -41,7 +41,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     
     void modelTransformQuadrat(glm::vec3 posicio, glm::vec3 escala);
 
-    void modelTransformQuadratCano(glm::vec3 posicio, glm::vec3 escala);
+    void modelTransformQuadratCano(glm::vec3 escala);
 
     void modelTransformQuadratRoda(int i, int j);
 
@@ -78,6 +78,8 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     float moureRoda = 0.0;
     float movx = 0.0;
     float angleRoda = 0.0;
+    glm::vec3 pivotCano = glm::vec3(0.125, 0.25, 0.0);
+    float angleCano = 0.0;
 
     QVector<float> posRoda = {-0.375, -0.125, 0.125, 0.375};
 
