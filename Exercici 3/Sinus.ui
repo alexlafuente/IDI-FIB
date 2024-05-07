@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Sinus</class>
+ <widget class="QWidget" name="Sinus">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>891</width>
+    <height>702</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>IDI-Lab</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>871</width>
+     <height>671</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_23">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_21">
+      <item>
+       <widget class="QSlider" name="verticalSlider">
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {
+    background: #021017;
+    BORDER-radius: 5px;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+}
+QSlider::handle:vertical {
+    height: 10px;
+    background: #0b1707;
+    border: 1px solid #895af4;
+    margin: 0px -10px;
+    /* expand outside the groove */
+
+    border-radius: 5px;
+}
+QSlider::add-page:vertical {
+    BORDER-radius: 5px;
+    border: 1px solid rgb(0,0,0);
+    background-color: #895af4;
+}
+QSlider::sub-page:vertical {
+    background: #021017;
+    BORDER-radius: 5px;
+    border: 1px solid rgb(0,0,0);
+    margin: 0px 1px 0px 1px;
+}
+QSlider::handle:vertical:hover {
+    background-color: #895af4;
+}</string>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="verticalSlider_2">
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {
+    background: #021017;
+    BORDER-radius: 5px;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+}
+QSlider::handle:vertical {
+    height: 10px;
+    background: #0b1707;
+    border: 1px solid #895af4;
+    margin: 0px -10px;
+    /* expand outside the groove */
+
+    border-radius: 5px;
+}
+QSlider::add-page:vertical {
+    BORDER-radius: 5px;
+    border: 1px solid rgb(0,0,0);
+    background-color: #895af4;
+}
+QSlider::sub-page:vertical {
+    background: #021017;
+    BORDER-radius: 5px;
+    border: 1px solid rgb(0,0,0);
+    margin: 0px 1px 0px 1px;
+}
+QSlider::handle:vertical:hover {
+    background-color: #895af4;
+}</string>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_20">
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_8">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_3">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_2">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_10">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_9">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_5">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_6">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_7">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyQProgressBar" name="progressBar_4">
+          <property name="styleSheet">
+           <string notr="true">qProgressBar{background-color:#895af4}</string>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_22">
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Toggle Animation</string>
+          </property>
+          <property name="shortcut">
+           <string>Alt+T</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Start</string>
+          </property>
+          <property name="shortcut">
+           <string>Alt+I</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>575</width>
+            <height>22</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Close</string>
+          </property>
+          <property name="shortcut">
+           <string>Alt+S</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>680</y>
+     <width>41</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>F</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>A</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyQProgressBar</class>
+   <extends>QProgressBar</extends>
+   <header>MyQprogressBar.h</header>
+   <slots>
+    <signal>initialize(int)</signal>
+    <signal>reset(int)</signal>
+    <slot>start()</slot>
+    <slot>initialized(int)</slot>
+    <slot>canviaFase(int)</slot>
+    <slot>canviaAmplitud(int)</slot>
+    <slot>toggleAnimation()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>progressBar_8</sender>
+   <signal>reset(int)</signal>
+   <receiver>verticalSlider_2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>40</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_8</sender>
+   <signal>reset(int)</signal>
+   <receiver>verticalSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_8</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>601</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>604</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_3</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>206</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>555</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_3</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_2</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>609</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>605</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_2</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_10</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_10</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_9</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>440</x>
+     <y>608</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>606</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_9</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_5</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>518</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_5</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_6</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>596</x>
+     <y>599</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>596</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_6</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_7</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>674</x>
+     <y>567</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>752</x>
+     <y>565</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressBar_7</sender>
+   <signal>initialize(int)</signal>
+   <receiver>progressBar_4</receiver>
+   <slot>initialized(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>752</x>
+     <y>614</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>830</x>
+     <y>613</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_8</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>21</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>118</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_7</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>752</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>19</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>189</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_3</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>281</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_4</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>830</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_8</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>114</x>
+     <y>286</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_5</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_2</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_6</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_9</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_10</receiver>
+   <slot>canviaFase(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_3</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>40</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_2</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>360</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_10</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>39</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_9</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_5</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_6</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_7</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>752</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_4</receiver>
+   <slot>canviaAmplitud(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>36</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>830</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_10</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>72</x>
+     <y>674</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_4</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>667</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>830</x>
+     <y>628</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_5</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_6</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>667</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>670</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>190</x>
+     <y>524</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_3</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>667</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_8</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>671</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>114</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_2</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_9</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>640</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Sinus</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>877</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>462</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_7</receiver>
+   <slot>toggleAnimation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>752</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar_8</receiver>
+   <slot>start()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>249</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>128</x>
+     <y>644</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
