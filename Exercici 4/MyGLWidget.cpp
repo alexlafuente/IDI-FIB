@@ -53,6 +53,117 @@ int MyGLWidget::printOglError(const char file[], int line, const char func[])
 MyGLWidget::~MyGLWidget() {
 }
 
+void MyGLWidget::iniEscena ()
+{
+  glm::vec3 pmin = glm::vec3(-12.5, 0, -12.5);
+  glm::vec3 pmax = glm::vec3(12.5, 0, 12.5);
+  centreEsc = (pmin + pmax) / 2.0f;
+  radiEsc = glm::distance(pmin, centreEsc);;
+}
+
+void MyGLWidget::iniCamera ()
+{
+  angleY = 0.0;
+  angleX = 0.0f;
+  ra = float(width())/height();
+  fov = 2*asin(radiEsc/2*radiEsc);
+  zn = radiEsc;
+  zf = 3*radiEsc;
+
+  vrp = glm::vec3(centreEsc);
+  obs = vrp + glm::vec3(0, 2*radiEsc, 0);
+  up = glm::vec3(0, 0, -1);
+
+  projectTransform();
+  viewTransform ();
+}
+
+void MyGLWidget::viewTransform()
+{
+  View = glm::translate(glm::mat4(1.f), glm::vec3(0, 0, -2*radiEsc));
+  View = glm::rotate(View, +angleX, glm::vec3(1, 0, 0));
+  View = glm::rotate(View, -angleY, glm::vec3(0, 1, 0));
+  View = glm::translate(View, -centreEsc);
+
+  glUniformMatrix4fv (viewLoc, 1, GL_FALSE, &View[0][0]);
+}
+
+void MyGLWidget::projectTransform()
+{
+  glm::mat4 Proj;  // Matriu de projecció
+  Proj = glm::perspective(fov, ra, zn, zf);
+
+  glUniformMatrix4fv (projLoc, 1, GL_FALSE, &Proj[0][0]);
+}
+
+void MyGLWidget::paintGL ()
+{
+  // En cas de voler canviar els paràmetres del viewport, descomenteu la crida següent i
+  // useu els paràmetres que considereu (els que hi ha són els de per defecte)
+  // glViewport (0, 0, ample, alt);
+
+  // Esborrem el frame-buffer i el depth-buffer
+  glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // TERRA
+  glBindVertexArray (VAO_Terra);
+  modelTransformTerra ();
+  glDrawArrays(GL_TRIANGLES, 0, 6);
+
+  // Road
+  glBindVertexArray (VAO_models[ROAD]);
+  for (int i = 0; i < 4; ++i) {
+    float angleRoad = (2*M_PI*i)/4.0f;
+    modelTransformRoad (glm::vec3(0, 0.01, 0), angleRoad);
+    glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
+  }
+
+  // Car
+  glBindVertexArray (VAO_models[CAR]);
+  modelTransformCar (0.0f, 0.0f);
+  glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
+
+  // Pipe
+  glBindVertexArray (VAO_models[PIPE]);
+  modelTransformPipe ();
+  glDrawArrays(GL_TRIANGLES, 0, models[PIPE].faces().size()*3);
+
+  glBindVertexArray(0);
+}
+
+void MyGLWidget::modelTransformPipe()
+{
+  glm::mat4 TG(1.0f);
+  TG = glm::scale(TG, glm::vec3(escalaModels[PIPE]));
+  TG = glm::translate(TG, -centreBaseModels[PIPE]);
+
+  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::modelTransformRoad(glm::vec3 pos, float angle)
+{
+  glm::mat4 TG(1.0f);
+  // TG = glm::translate(TG, pos);
+  TG = glm:: translate(TG, glm::vec3(pos.x-10, pos.y, pos.z)); // tornar a l'origen
+
+  TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0)); // Rotació angle y de l'angle de la carretera (rotació respecte a radi 10)
+  TG = glm:: translate(TG, glm::vec3(10, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
+
+  TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
+  TG = glm::translate(TG, -centreBaseModels[ROAD]);
+
+  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::modelTransformTerra ()
+{
+  glm::mat4 TG(1.0f);
+  // TG = glm::translate(TG, glm::vec3(5, 0, 5)); // Desplaçar a l'origen
+  TG = glm::scale(TG, glm::vec3(25/10, 25/10, 25/10));
+  TG = glm::translate(TG, glm::vec3(-5, 0, -5)); // Desplaçar a l'origen
+  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
 void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 {
   makeCurrent();
@@ -61,6 +172,7 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
   {
     // Fem la rotació
     angleY += (e->x() - xClick) * M_PI / ample;
+    angleX -= (e->y() - yClick) * M_PI / alt;
     viewTransform ();
   }
 
