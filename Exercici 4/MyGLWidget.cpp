@@ -11,7 +11,7 @@ MyGLWidget::MyGLWidget(QWidget *parent) : LL4GLWidget(parent) {
 
 }
 
-int MyGLWidget::printOglError(const char file[], int line, const char func[]) 
+int MyGLWidget::printOglError(const char file[], int line, const char func[])
 {
     GLenum glErr;
     int    retCode = 0;
@@ -26,7 +26,7 @@ int MyGLWidget::printOglError(const char file[], int line, const char func[])
         case 0x501:
             error = "GL_INVALID_VALUE";
             break;
-        case 0x502: 
+        case 0x502:
             error = "GL_INVALID_OPERATION";
             break;
         case 0x503:
@@ -58,7 +58,11 @@ void MyGLWidget::iniEscena ()
   glm::vec3 pmin = glm::vec3(-12.5, 0, -12.5);
   glm::vec3 pmax = glm::vec3(12.5, 0, 12.5);
   centreEsc = (pmin + pmax) / 2.0f;
-  radiEsc = glm::distance(pmin, centreEsc);;
+  radiEsc = glm::distance(pmin, centreEsc);
+  posRoads[0] = glm::vec3(6, 0.01, 0);
+  posRoads[1] = glm::vec3(0, 0.01, -4.5);
+  posRoads[2] = glm::vec3(-4.5, 0.01, 0);
+  posRoads[3] = glm::vec3(0, 0.01, 4.5);
 }
 
 void MyGLWidget::iniCamera ()
@@ -110,17 +114,9 @@ void MyGLWidget::paintGL ()
   modelTransformTerra ();
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
-  // Road
-  glBindVertexArray (VAO_models[ROAD]);
-  for (int i = 0; i < 4; ++i) {
-    float angleRoad = (2*M_PI*i)/4.0f;
-    modelTransformRoad (glm::vec3(0, 0.01, 0), angleRoad);
-    glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
-  }
-
   // Car
   glBindVertexArray (VAO_models[CAR]);
-  modelTransformCar (0.0f, 0.0f);
+  modelTransformCar (9.0f, 0.0f);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
   // Pipe
@@ -128,29 +124,52 @@ void MyGLWidget::paintGL ()
   modelTransformPipe ();
   glDrawArrays(GL_TRIANGLES, 0, models[PIPE].faces().size()*3);
 
+  // Road
+  glBindVertexArray (VAO_models[ROAD]);
+  for (int i = 0; i < 4; ++i) {
+    float angleRoad = (2*M_PI*i)/4.0f;
+    modelTransformRoad (posRoads[0], angleRoad);
+    glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
+  }
+
   glBindVertexArray(0);
-}
-
-void MyGLWidget::modelTransformPipe()
-{
-  glm::mat4 TG(1.0f);
-  TG = glm::scale(TG, glm::vec3(escalaModels[PIPE]));
-  TG = glm::translate(TG, -centreBaseModels[PIPE]);
-
-  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
 void MyGLWidget::modelTransformRoad(glm::vec3 pos, float angle)
 {
   glm::mat4 TG(1.0f);
-  // TG = glm::translate(TG, pos);
-  TG = glm:: translate(TG, glm::vec3(pos.x-10, pos.y, pos.z)); // tornar a l'origen
+  TG = glm::translate(TG, pos);
+  TG = glm:: translate(TG, glm::vec3(-(10-4), 0, 0)); // tornar a l'origen
 
   TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0)); // Rotació angle y de l'angle de la carretera (rotació respecte a radi 10)
-  TG = glm:: translate(TG, glm::vec3(10, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
+  TG = glm:: translate(TG, glm::vec3(10-4, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
 
+  TG = glm::rotate(TG, glm::radians(-45.0f), glm::vec3(0, 1, 0));
+  TG = glm::scale(TG, glm::vec3(4,4,4));
   TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
   TG = glm::translate(TG, -centreBaseModels[ROAD]);
+
+  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::modelTransformCar(float radi, float angle)
+{
+  glm::mat4 TG(1.0f);
+  TG = glm::rotate(TG, glm::radians(angle), glm::vec3(0,1,0));
+  TG = glm::translate(TG, glm::vec3(radi,0,0)); // Per rotar amb el radi corresponent
+
+  TG = glm::scale(TG, glm::vec3(escalaModels[CAR]));
+  TG = glm::translate(TG, -centreBaseModels[CAR]);
+
+  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::modelTransformPipe()
+{
+  glm::mat4 TG(1.0f);
+  TG = glm::scale(TG, glm::vec3(5, 5, 5));
+  TG = glm::scale(TG, glm::vec3(escalaModels[PIPE]));
+  TG = glm::translate(TG, -centreBaseModels[PIPE]);
 
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -196,7 +215,7 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   case Qt::Key_S: {
       // ...
     break;
-	}	
+	}
   default: LL4GLWidget::keyPressEvent(event); break;
   }
   update();

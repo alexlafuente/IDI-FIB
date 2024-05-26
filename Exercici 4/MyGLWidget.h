@@ -16,8 +16,11 @@ class MyGLWidget : public LL4GLWidget {
     virtual void modelTransformPipe();
     virtual void projectTransform();
     virtual void viewTransform();
+    virtual void modelTransformCar(float radi, float angle);
     virtual void iniEscena();
     virtual void iniCamera();
+
+    QVector<glm::vec3> posRoads = QVector<glm::vec3>(4);
 
     float angleX;
 
