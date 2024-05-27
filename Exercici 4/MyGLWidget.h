@@ -28,7 +28,7 @@ class MyGLWidget : public LL4GLWidget {
     float ra, fov, zn, zf;
     glm::vec3 obs, vrp, up;
 
-    GLuint colorCotxeLoc, posFocusLoc, colFocusLoc;
+    GLuint colorCotxeLoc, posFocusSCOLoc, colFocusLoc, posFocusCar1Loc, posFocusCar2Loc;
 
     float angleCar1, angleCar2, radiCar1, radiCar2;
 

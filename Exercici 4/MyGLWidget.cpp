@@ -57,8 +57,10 @@ void MyGLWidget::initializeGL()
 {
   LL4GLWidget::initializeGL();
   colorCotxeLoc = glGetUniformLocation(program->programId(), "colorCotxe");
-  posFocusLoc = glGetUniformLocation(program->programId(), "posFocus");
+  posFocusSCOLoc = glGetUniformLocation(program->programId(), "posFocus");
   colFocusLoc = glGetUniformLocation(program->programId(), "colFocus");
+  posFocusCar1Loc = glGetUniformLocation(program->programId(), "posFocusCar1");
+  posFocusCar2Loc = glGetUniformLocation(program->programId(), "posFocusCar2");
 }
 
 void MyGLWidget::iniEscena ()
@@ -121,7 +123,7 @@ void MyGLWidget::paintGL ()
   // Assignar els paràmetres pel focus de l'observador
   glm::vec3 posicioFocus = glm::vec3(0, 0, 0);
   glm::vec3 colorFocus = glm::vec3(0.8, 0.8, 0.8);
-  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(posFocusSCOLoc, 1, &posicioFocus[0]);
   glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
 
   // TERRA
@@ -138,7 +140,7 @@ void MyGLWidget::paintGL ()
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   posicioFocus = glm::vec3(View*TGcar1*glm::vec4(2.48,0.4,-3.2,1));
   colorFocus = glm::vec3(0.6, 0.6, 0.0);
-  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(posFocusCar1Loc, 1, &posicioFocus[0]);
   glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
@@ -148,7 +150,7 @@ void MyGLWidget::paintGL ()
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   posicioFocus = glm::vec3(View*TGcar2*glm::vec4(2.48,0.4,-3.2,1));
   colorFocus = glm::vec3(0.6, 0.6, 0.0);
-  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(posFocusCar2Loc, 1, &posicioFocus[0]);
   glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 

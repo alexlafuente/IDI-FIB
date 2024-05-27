@@ -9,6 +9,10 @@ in vec3  fnormal;
 
 uniform vec3 posFocus;
 uniform vec3 colFocus;
+
+uniform vec3 posFocusCar1;
+uniform vec3 posFocusCar2;
+
 const vec3 llumAmbient = vec3(0.2, 0.2, 0.2);
 
 out vec4 FragColor;
@@ -51,8 +55,14 @@ void main()
 {
   vec3 normSCO = normalize(fnormal);
   vec3 LSCO = normalize(posFocus - fvertex);
-  vec3 difus = Difus(normSCO, LSCO, colFocus);
-  vec3 espec = Especular(normSCO, LSCO, fvertex, colFocus);
-  vec3 color = Ambient() + difus + espec;
-  FragColor = vec4(color, 1.0);
+
+  vec3 Lcar1 = normalize(posFocusCar2 - fvertex);
+  vec3 Lcar2 = normalize(posFocusCar1 - fvertex);
+
+  vec3 colorSCO = Difus(normSCO, LSCO, colFocus) + Especular(normSCO, LSCO, fvertex, colFocus);
+
+  vec3 colorCar1 = Difus(normSCO, Lcar1, colFocus) + Especular(normSCO, Lcar1, fvertex, colFocus);
+  vec3 colorCar2 = Difus(normSCO, Lcar2, colFocus) + Especular(normSCO, Lcar2, fvertex, colFocus);
+
+  FragColor = vec4(Ambient() + colorSCO + colorCar1 + colorCar2, 1.0);
 }
