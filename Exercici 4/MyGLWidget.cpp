@@ -65,10 +65,10 @@ void MyGLWidget::iniEscena ()
   glm::vec3 pmax = glm::vec3(12.5, 0, 12.5);
   centreEsc = (pmin + pmax) / 2.0f;
   radiEsc = glm::distance(pmin, centreEsc);
-  posRoads[0] = glm::vec3(6, 0.01, 0);
-  posRoads[1] = glm::vec3(0, 0.01, -4.5);
-  posRoads[2] = glm::vec3(-4.5, 0.01, 0);
-  posRoads[3] = glm::vec3(0, 0.01, 4.5);
+  angleCar1 = 0.0f;
+  angleCar2 = 0.0f;
+  radiCar1 = 6.5f;
+  radiCar2 = 9.0f;
 }
 
 void MyGLWidget::iniCamera ()
@@ -124,11 +124,11 @@ void MyGLWidget::paintGL ()
   glm::vec3 color = glm::vec3(0, 1, 0);
   glBindVertexArray (VAO_models[CAR]);
 
-  modelTransformCar (6.5f, 0.0f);
+  modelTransformCar (radiCar1, angleCar1);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
-  modelTransformCar (9.0f, 0.0f);
+  modelTransformCar (radiCar2, angleCar2);
   color = glm::vec3(1, 0, 0);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
@@ -235,7 +235,10 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   makeCurrent();
   switch (event->key()) {
   case Qt::Key_Up: {
-      // ...
+      angleCar1 += float(glm::radians(2.0f));
+      angleCar2 += float(glm::radians(3.0f));
+      modelTransformCar(radiCar1, angleCar1);
+      modelTransformCar(radiCar2, angleCar2);
     break;
 	}
   case Qt::Key_L: {
