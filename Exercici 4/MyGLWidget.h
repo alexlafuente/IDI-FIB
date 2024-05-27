@@ -1,5 +1,6 @@
 // MyGLWidget.h
 #include "LL4GLWidget.h"
+#include <QTimer>
 
 class MyGLWidget : public LL4GLWidget {
   Q_OBJECT
@@ -38,6 +39,11 @@ class MyGLWidget : public LL4GLWidget {
 
     bool llumEncesa;
     glm::vec3 posicioFocusSCO, colorFocusSCO;
+
+    QTimer timer;
+
+  public slots:
+    void animate();
 
   private:
     int printOglError(const char file[], int line, const char func[]);

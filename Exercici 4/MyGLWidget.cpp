@@ -78,6 +78,7 @@ void MyGLWidget::iniEscena ()
   cameraEncesa = true;
   posicioFocusSCO = glm::vec3(0, 0, 0);
   colorFocusSCO = glm::vec3(0.8, 0.8, 0.8);
+  connect(&timer,SIGNAL(timeout()),this, SLOT(animate()));
 }
 
 void MyGLWidget::iniCamera ()
@@ -253,8 +254,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   makeCurrent();
   switch (event->key()) {
   case Qt::Key_Up: {
-      angleCar1 += float(glm::radians(2.0f));
-      angleCar2 += float(glm::radians(3.0f));
+      angleCar1 += float(glm::radians(20.0f));
+      angleCar2 += float(glm::radians(30.0f));
       modelTransformCar(radiCar1, angleCar1, TGcar1);
       modelTransformCar(radiCar2, angleCar2, TGcar2);
     break;
@@ -273,10 +274,25 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
     break;
 	}
   case Qt::Key_S: {
-      // ...
+    if(timer.isActive()) {
+      timer.stop();
+    }
+    else {
+      timer.start(50);
+    }
     break;
 	}
   default: LL4GLWidget::keyPressEvent(event); break;
   }
+  update();
+}
+
+void MyGLWidget::animate()
+{
+  makeCurrent();
+  angleCar1 += float(glm::radians(20.0f));
+  angleCar2 += float(glm::radians(30.0f));
+  modelTransformCar(radiCar1, angleCar1, TGcar1);
+  modelTransformCar(radiCar2, angleCar2, TGcar2);
   update();
 }
