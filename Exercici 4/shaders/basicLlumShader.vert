@@ -12,6 +12,8 @@ uniform mat4 TG;
 uniform mat4 Proj;
 uniform mat4 View;
 
+in vec3 colorCotxe;
+
 out vec3  fmatamb;
 out vec3  fmatdiff;
 out vec3  fmatspec;

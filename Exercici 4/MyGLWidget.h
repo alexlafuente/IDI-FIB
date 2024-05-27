@@ -19,6 +19,7 @@ class MyGLWidget : public LL4GLWidget {
     virtual void modelTransformCar(float radi, float angle);
     virtual void iniEscena();
     virtual void iniCamera();
+    virtual void initializeGL();
 
     QVector<glm::vec3> posRoads = QVector<glm::vec3>(4);
 
@@ -27,6 +28,8 @@ class MyGLWidget : public LL4GLWidget {
     // iniCamera
     float ra, fov, zn, zf;
     glm::vec3 obs, vrp, up;
+
+    GLuint colorCotxeLoc;
 
   private:
     int printOglError(const char file[], int line, const char func[]);

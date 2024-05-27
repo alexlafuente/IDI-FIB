@@ -53,6 +53,12 @@ int MyGLWidget::printOglError(const char file[], int line, const char func[])
 MyGLWidget::~MyGLWidget() {
 }
 
+void MyGLWidget::initializeGL()
+{
+  LL4GLWidget::initializeGL();
+  colorCotxeLoc = glGetUniformLocation(program->programId(), "colorCotxe");
+}
+
 void MyGLWidget::iniEscena ()
 {
   glm::vec3 pmin = glm::vec3(-12.5, 0, -12.5);
@@ -115,8 +121,16 @@ void MyGLWidget::paintGL ()
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
   // Car
+  glm::vec3 color = glm::vec3(0, 1, 0);
   glBindVertexArray (VAO_models[CAR]);
+
+  modelTransformCar (6.5f, 0.0f);
+  glUniform3fv(colorCotxeLoc, 1, &color[0]);
+  glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
+
   modelTransformCar (9.0f, 0.0f);
+  color = glm::vec3(1, 0, 0);
+  glUniform3fv(colorCotxeLoc, 1, &color[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
   // Pipe
@@ -126,10 +140,14 @@ void MyGLWidget::paintGL ()
 
   // Road
   glBindVertexArray (VAO_models[ROAD]);
+  // for (int i = 0; i < 4; ++i) {
+  //   float angleRoad = (2*M_PI*i)/4.0f;
+  //   modelTransformRoad (glm::vec3(10-4.2, 0.01, 0), angleRoad);
+  //   glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
+  // }
   for (int i = 0; i < 4; ++i) {
-    float angleRoad = (2*M_PI*i)/4.0f;
-    modelTransformRoad (posRoads[0], angleRoad);
-    glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
+    modelTransformRoad (glm::vec3(1, 0.01, -1), (2*M_PI*i)/4.0f);
+      glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
   }
 
   glBindVertexArray(0);
@@ -138,16 +156,25 @@ void MyGLWidget::paintGL ()
 void MyGLWidget::modelTransformRoad(glm::vec3 pos, float angle)
 {
   glm::mat4 TG(1.0f);
+
+  TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0));
+  TG = glm::scale(TG, glm::vec3(5, 5, 5));
   TG = glm::translate(TG, pos);
-  TG = glm:: translate(TG, glm::vec3(-(10-4), 0, 0)); // tornar a l'origen
-
-  TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0)); // Rotació angle y de l'angle de la carretera (rotació respecte a radi 10)
-  TG = glm:: translate(TG, glm::vec3(10-4, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
-
-  TG = glm::rotate(TG, glm::radians(-45.0f), glm::vec3(0, 1, 0));
-  TG = glm::scale(TG, glm::vec3(4,4,4));
   TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
   TG = glm::translate(TG, -centreBaseModels[ROAD]);
+
+  // // LL4GLWidget::modelTransformRoad(pos, angle);
+  // glm::mat4 TG(1.0f);
+  // TG = glm::translate(TG, pos);
+  // TG = glm:: translate(TG, glm::vec3(-(10-4.2), 0, 0)); // tornar a l'origen
+  //
+  // TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0)); // Rotació angle y de l'angle de la carretera (rotació respecte a radi 10)
+  // TG = glm:: translate(TG, glm::vec3(10-4.2, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
+  //
+  // TG = glm::rotate(TG, glm::radians(-45.0f), glm::vec3(0, 1, 0));
+  // TG = glm::scale(TG, glm::vec3(4.2,4.2,4.2));
+  // TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
+  // TG = glm::translate(TG, -centreBaseModels[ROAD]);
 
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -178,7 +205,7 @@ void MyGLWidget::modelTransformTerra ()
 {
   glm::mat4 TG(1.0f);
   // TG = glm::translate(TG, glm::vec3(5, 0, 5)); // Desplaçar a l'origen
-  TG = glm::scale(TG, glm::vec3(25/10, 25/10, 25/10));
+  TG = glm::scale(TG, glm::vec3(float(25/10), float(25/10), float(25/10)));
   TG = glm::translate(TG, glm::vec3(-5, 0, -5)); // Desplaçar a l'origen
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
