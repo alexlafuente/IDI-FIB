@@ -16,7 +16,7 @@ class MyGLWidget : public LL4GLWidget {
     virtual void modelTransformPipe();
     virtual void projectTransform();
     virtual void viewTransform();
-    virtual void modelTransformCar(float radi, float angle);
+    virtual void modelTransformCar(float radi, float angle, glm::mat4& TG);
     virtual void iniEscena();
     virtual void iniCamera();
     virtual void initializeGL();
@@ -31,6 +31,10 @@ class MyGLWidget : public LL4GLWidget {
     GLuint colorCotxeLoc, posFocusLoc, colFocusLoc;
 
     float angleCar1, angleCar2, radiCar1, radiCar2;
+
+    bool cameraEncesa;
+
+    glm::mat4 TGcar1, TGcar2;
 
   private:
     int printOglError(const char file[], int line, const char func[]);

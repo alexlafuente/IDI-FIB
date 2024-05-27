@@ -71,6 +71,7 @@ void MyGLWidget::iniEscena ()
   angleCar2 = 0.0f;
   radiCar1 = 6.5f;
   radiCar2 = 9.0f;
+  cameraEncesa = true;
 }
 
 void MyGLWidget::iniCamera ()
@@ -132,15 +133,26 @@ void MyGLWidget::paintGL ()
   glm::vec3 color = glm::vec3(0, 1, 0);
   glBindVertexArray (VAO_models[CAR]);
 
-  modelTransformCar (radiCar1, angleCar1);
+  // Primer cotxe amb focus
+  modelTransformCar (radiCar1, angleCar1, TGcar1);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
+  posicioFocus = glm::vec3(View*TGcar1*glm::vec4(2.48,0.4,-3.2,1));
+  colorFocus = glm::vec3(0.6, 0.6, 0.0);
+  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
-  modelTransformCar (radiCar2, angleCar2);
+  // Segon cotxe
+  modelTransformCar (radiCar2, angleCar2, TGcar2);
   color = glm::vec3(1, 0, 0);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
+  posicioFocus = glm::vec3(View*TGcar2*glm::vec4(2.48,0.4,-3.2,1));
+  colorFocus = glm::vec3(0.6, 0.6, 0.0);
+  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
+  // Evitar que s'apliqui la multiplicació dels colors dels cotxes a la resta d'objectes
   color = glm::vec3(1, 1, 1);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
 
@@ -174,25 +186,12 @@ void MyGLWidget::modelTransformRoad(glm::vec3 pos, float angle)
   TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
   TG = glm::translate(TG, -centreBaseModels[ROAD]);
 
-  // // LL4GLWidget::modelTransformRoad(pos, angle);
-  // glm::mat4 TG(1.0f);
-  // TG = glm::translate(TG, pos);
-  // TG = glm:: translate(TG, glm::vec3(-(10-4.2), 0, 0)); // tornar a l'origen
-  //
-  // TG = glm::rotate(TG, angle, glm::vec3(0, 1, 0)); // Rotació angle y de l'angle de la carretera (rotació respecte a radi 10)
-  // TG = glm:: translate(TG, glm::vec3(10-4.2, 0, 0)); // Posició (10,0,0) per tenir radi 10 respecte l'origen
-  //
-  // TG = glm::rotate(TG, glm::radians(-45.0f), glm::vec3(0, 1, 0));
-  // TG = glm::scale(TG, glm::vec3(4.2,4.2,4.2));
-  // TG = glm::scale(TG, glm::vec3(escalaModels[ROAD]));
-  // TG = glm::translate(TG, -centreBaseModels[ROAD]);
-
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
-void MyGLWidget::modelTransformCar(float radi, float angle)
+void MyGLWidget::modelTransformCar(float radi, float angle, glm::mat4& TG)
 {
-  glm::mat4 TG(1.0f);
+  TG = glm::mat4(1.0f);
   TG = glm::rotate(TG, glm::radians(angle), glm::vec3(0,1,0));
   TG = glm::translate(TG, glm::vec3(radi,0,0)); // Per rotar amb el radi corresponent
 
@@ -252,12 +251,12 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   case Qt::Key_Up: {
       angleCar1 += float(glm::radians(2.0f));
       angleCar2 += float(glm::radians(3.0f));
-      modelTransformCar(radiCar1, angleCar1);
-      modelTransformCar(radiCar2, angleCar2);
+      modelTransformCar(radiCar1, angleCar1, TGcar1);
+      modelTransformCar(radiCar2, angleCar2, TGcar2);
     break;
 	}
   case Qt::Key_L: {
-      // ...
+      cameraEncesa = !cameraEncesa;
     break;
 	}
   case Qt::Key_S: {
