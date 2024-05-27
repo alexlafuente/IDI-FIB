@@ -12,7 +12,7 @@ uniform mat4 TG;
 uniform mat4 Proj;
 uniform mat4 View;
 
-in vec3 colorCotxe;
+uniform vec3 colorCotxe;
 
 out vec3  fmatamb;
 out vec3  fmatdiff;
@@ -26,7 +26,7 @@ void main()
 {	
     // Passem les dades al fragment shader
     fmatamb  = matamb;
-    fmatdiff = matdiff;
+    fmatdiff = matdiff * colorCotxe;
     fmatspec = matspec;
     fmatshin = matshin;
     fvertex = vertex; // CALCULEU CORRECTAMENT

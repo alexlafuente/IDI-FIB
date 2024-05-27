@@ -133,6 +133,9 @@ void MyGLWidget::paintGL ()
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
+  color = glm::vec3(1, 1, 1);
+  glUniform3fv(colorCotxeLoc, 1, &color[0]);
+
   // Pipe
   glBindVertexArray (VAO_models[PIPE]);
   modelTransformPipe ();
@@ -145,7 +148,7 @@ void MyGLWidget::paintGL ()
   //   modelTransformRoad (glm::vec3(10-4.2, 0.01, 0), angleRoad);
   //   glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
   // }
-  for (int i = 0; i < 4; ++i) {
+  for (int i = 0; i < 4 ; ++i) {
     modelTransformRoad (glm::vec3(1, 0.01, -1), (2*M_PI*i)/4.0f);
       glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
   }
