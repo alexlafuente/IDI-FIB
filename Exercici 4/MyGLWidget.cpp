@@ -91,8 +91,7 @@ void MyGLWidget::iniCamera ()
   zf = 3*radiEsc;
 
   vrp = glm::vec3(centreEsc);
-  obs = vrp + glm::vec3(0, 2*radiEsc, 0);
-  up = glm::vec3(0, 0, -1);
+  obs = vrp + glm::vec3(0, 0, 2*radiEsc);
 
   projectTransform();
   viewTransform ();
@@ -100,7 +99,7 @@ void MyGLWidget::iniCamera ()
 
 void MyGLWidget::viewTransform()
 {
-  View = glm::translate(glm::mat4(1.f), glm::vec3(0, 0, -2*radiEsc));
+  View = glm::translate(glm::mat4(1.f), -obs);
   View = glm::rotate(View, +angleX, glm::vec3(1, 0, 0));
   View = glm::rotate(View, -angleY, glm::vec3(0, 1, 0));
   View = glm::translate(View, -centreEsc);
@@ -135,7 +134,7 @@ void MyGLWidget::paintGL ()
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
   // Car
-  glm::vec3 color = glm::vec3(0, 1, 0);
+  glm::vec3 color = glm::vec3(1, 0, 0);
   glBindVertexArray (VAO_models[CAR]);
 
   // Primer cotxe amb focus
@@ -149,7 +148,7 @@ void MyGLWidget::paintGL ()
 
   // Segon cotxe
   modelTransformCar (radiCar2, angleCar2, TGcar2);
-  color = glm::vec3(1, 0, 0);
+  color = glm::vec3(0, 1, 0);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
   posicioFocus = glm::vec3(View*TGcar2*glm::vec4(2.48,0.4,-3.2,1));
   colorFocusCar = glm::vec3(0.6, 0.6, 0.0);
@@ -220,7 +219,7 @@ void MyGLWidget::modelTransformTerra ()
 {
   glm::mat4 TG(1.0f);
   // TG = glm::translate(TG, glm::vec3(5, 0, 5)); // Desplaçar a l'origen
-  TG = glm::scale(TG, glm::vec3(float(25/10), float(25/10), float(25/10)));
+  TG = glm::scale(TG, glm::vec3(25.0f/10.0f, 25.0f/10.0f, 25.0f/10.0f));
   TG = glm::translate(TG, glm::vec3(-5, 0, -5)); // Desplaçar a l'origen
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -253,14 +252,14 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   makeCurrent();
   switch (event->key()) {
-  case Qt::Key_Up: {
+    case Qt::Key_Up: {
       angleCar1 += float(glm::radians(20.0f));
       angleCar2 += float(glm::radians(30.0f));
       modelTransformCar(radiCar1, angleCar1, TGcar1);
       modelTransformCar(radiCar2, angleCar2, TGcar2);
-    break;
-	}
-  case Qt::Key_L: {
+      break;
+    }
+    case Qt::Key_L: {
       cameraEncesa = not cameraEncesa;
       if (not cameraEncesa) {
         colorFocusSCO = glm::vec3(0.0, 0.0, 0.0);
@@ -270,19 +269,19 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
         colorFocusSCO = glm::vec3(0.8, 0.8, 0.8);
         glClearColor(0.5, 0.7, 1.0, 1.0);
       }
-    glUniform3fv(colFocusSCOLoc, 1, &colorFocusSCO[0]);
-    break;
-	}
-  case Qt::Key_S: {
-    if(timer.isActive()) {
-      timer.stop();
+      glUniform3fv(colFocusSCOLoc, 1, &colorFocusSCO[0]);
+      break;
     }
-    else {
-      timer.start(50);
+    case Qt::Key_S: {
+      if(timer.isActive()) {
+        timer.stop();
+      }
+      else {
+        timer.start(50);
+      }
+      break;
     }
-    break;
-	}
-  default: LL4GLWidget::keyPressEvent(event); break;
+    default: LL4GLWidget::keyPressEvent(event); break;
   }
   update();
 }

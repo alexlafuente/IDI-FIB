@@ -27,7 +27,7 @@ class MyGLWidget : public LL4GLWidget {
 
     // iniCamera
     float ra, fov, zn, zf;
-    glm::vec3 obs, vrp, up;
+    glm::vec3 obs, vrp;
 
     GLuint colorCotxeLoc, posFocusSCOLoc, colFocusSCOLoc, posFocusCar1Loc, posFocusCar2Loc, colFocusCar1Loc, colFocusCar2Loc;
 
