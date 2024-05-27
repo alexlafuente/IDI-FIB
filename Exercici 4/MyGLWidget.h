@@ -36,6 +36,9 @@ class MyGLWidget : public LL4GLWidget {
 
     glm::mat4 TGcar1, TGcar2;
 
+    bool llumEncesa;
+    glm::vec3 posicioFocusSCO, colorFocusSCO;
+
   private:
     int printOglError(const char file[], int line, const char func[]);
 };
