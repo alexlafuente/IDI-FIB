@@ -20,6 +20,7 @@ class MyGLWidget : public LL4GLWidget {
     virtual void iniEscena();
     virtual void iniCamera();
     virtual void initializeGL();
+    virtual void iniMaterialTerra();
 
     float angleX;
 
@@ -27,7 +28,7 @@ class MyGLWidget : public LL4GLWidget {
     float ra, fov, zn, zf;
     glm::vec3 obs, vrp, up;
 
-    GLuint colorCotxeLoc;
+    GLuint colorCotxeLoc, posFocusLoc, colFocusLoc;
 
     float angleCar1, angleCar2, radiCar1, radiCar2;
 

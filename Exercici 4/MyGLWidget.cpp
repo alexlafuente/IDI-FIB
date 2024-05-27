@@ -57,6 +57,8 @@ void MyGLWidget::initializeGL()
 {
   LL4GLWidget::initializeGL();
   colorCotxeLoc = glGetUniformLocation(program->programId(), "colorCotxe");
+  posFocusLoc = glGetUniformLocation(program->programId(), "posFocus");
+  colFocusLoc = glGetUniformLocation(program->programId(), "colFocus");
 }
 
 void MyGLWidget::iniEscena ()
@@ -114,6 +116,12 @@ void MyGLWidget::paintGL ()
 
   // Esborrem el frame-buffer i el depth-buffer
   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Assignar els paràmetres pel focus de l'observador
+  glm::vec3 posicioFocus = glm::vec3(0, 0, 0);
+  glm::vec3 colorFocus = glm::vec3(0.8, 0.8, 0.8);
+  glUniform3fv(posFocusLoc, 1, &posicioFocus[0]);
+  glUniform3fv(colFocusLoc, 1, &colorFocus[0]);
 
   // TERRA
   glBindVertexArray (VAO_Terra);
@@ -211,6 +219,13 @@ void MyGLWidget::modelTransformTerra ()
   TG = glm::scale(TG, glm::vec3(float(25/10), float(25/10), float(25/10)));
   TG = glm::translate(TG, glm::vec3(-5, 0, -5)); // Desplaçar a l'origen
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::iniMaterialTerra() {
+  amb = glm::vec3(0.0,0.1,0.1);
+  diff = glm::vec3(0.0,0.5,0.5);
+  spec = glm::vec3(0.8,0.8,0.8);
+  shin = 100;
 }
 
 void MyGLWidget::mouseMoveEvent(QMouseEvent *e)

@@ -29,8 +29,11 @@ void main()
     fmatdiff = matdiff * colorCotxe;
     fmatspec = matspec;
     fmatshin = matshin;
-    fvertex = vertex; // CALCULEU CORRECTAMENT
-    fnormal = normal; // CALCULEU CORRECTAMENT
+
+    fvertex = vec3(View * TG * vec4(vertex, 1.0)); // CALCULEU CORRECTAMENT
+
+    mat3 normalMatrix = inverse(transpose(mat3(View*TG)));
+    fnormal = vec3(normalMatrix*normal); // CALCULEU CORRECTAMENT
 
     gl_Position = Proj * View * TG * vec4 (vertex, 1.0);
 }
