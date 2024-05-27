@@ -65,7 +65,7 @@ void MyGLWidget::initializeGL()
   colFocusCar2Loc = glGetUniformLocation(program->programId(), "colFocusCar2");
 }
 
-void MyGLWidget::iniEscena ()
+void MyGLWidget::iniEscena()
 {
   glm::vec3 pmin = glm::vec3(-12.5, 0, -12.5);
   glm::vec3 pmax = glm::vec3(12.5, 0, 12.5);
@@ -94,7 +94,7 @@ void MyGLWidget::iniCamera ()
   obs = vrp + glm::vec3(0, 0, 2*radiEsc);
 
   projectTransform();
-  viewTransform ();
+  viewTransform();
 }
 
 void MyGLWidget::viewTransform()
@@ -115,7 +115,7 @@ void MyGLWidget::projectTransform()
   glUniformMatrix4fv (projLoc, 1, GL_FALSE, &Proj[0][0]);
 }
 
-void MyGLWidget::paintGL ()
+void MyGLWidget::paintGL()
 {
   // En cas de voler canviar els paràmetres del viewport, descomenteu la crida següent i
   // useu els paràmetres que considereu (els que hi ha són els de per defecte)
@@ -146,7 +146,7 @@ void MyGLWidget::paintGL ()
   glUniform3fv(colFocusCar1Loc, 1, &colorFocusCar[0]);
   glDrawArrays(GL_TRIANGLES, 0, models[CAR].faces().size()*3);
 
-  // Segon cotxe
+  // Segon cotxe amb focus
   modelTransformCar (radiCar2, angleCar2, TGcar2);
   color = glm::vec3(0, 1, 0);
   glUniform3fv(colorCotxeLoc, 1, &color[0]);
@@ -167,11 +167,6 @@ void MyGLWidget::paintGL ()
 
   // Road
   glBindVertexArray (VAO_models[ROAD]);
-  // for (int i = 0; i < 4; ++i) {
-  //   float angleRoad = (2*M_PI*i)/4.0f;
-  //   modelTransformRoad (glm::vec3(10-4.2, 0.01, 0), angleRoad);
-  //   glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
-  // }
   for (int i = 0; i < 4 ; ++i) {
     modelTransformRoad (glm::vec3(1, 0.01, -1), (2*M_PI*i)/4.0f);
       glDrawArrays(GL_TRIANGLES, 0, models[ROAD].faces().size()*3);
@@ -218,7 +213,6 @@ void MyGLWidget::modelTransformPipe()
 void MyGLWidget::modelTransformTerra ()
 {
   glm::mat4 TG(1.0f);
-  // TG = glm::translate(TG, glm::vec3(5, 0, 5)); // Desplaçar a l'origen
   TG = glm::scale(TG, glm::vec3(25.0f/10.0f, 25.0f/10.0f, 25.0f/10.0f));
   TG = glm::translate(TG, glm::vec3(-5, 0, -5)); // Desplaçar a l'origen
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
@@ -253,8 +247,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
   makeCurrent();
   switch (event->key()) {
     case Qt::Key_Up: {
-      angleCar1 += float(glm::radians(20.0f));
-      angleCar2 += float(glm::radians(30.0f));
+      angleCar1 += float(glm::radians(2.0f));
+      angleCar2 += float(glm::radians(3.0f));
       modelTransformCar(radiCar1, angleCar1, TGcar1);
       modelTransformCar(radiCar2, angleCar2, TGcar2);
       break;
@@ -289,8 +283,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
 void MyGLWidget::animate()
 {
   makeCurrent();
-  angleCar1 += float(glm::radians(20.0f));
-  angleCar2 += float(glm::radians(30.0f));
+  angleCar1 += float(glm::radians(2.0f));
+  angleCar2 += float(glm::radians(3.0f));
   modelTransformCar(radiCar1, angleCar1, TGcar1);
   modelTransformCar(radiCar2, angleCar2, TGcar2);
   update();
