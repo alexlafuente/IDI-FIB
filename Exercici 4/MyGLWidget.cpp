@@ -191,7 +191,7 @@ void MyGLWidget::modelTransformRoad(glm::vec3 pos, float angle)
 void MyGLWidget::modelTransformCar(float radi, float angle, glm::mat4& TG)
 {
   TG = glm::mat4(1.0f);
-  TG = glm::rotate(TG, glm::radians(angle), glm::vec3(0,1,0));
+  TG = glm::rotate(TG, angle, glm::vec3(0,1,0));
   TG = glm::translate(TG, glm::vec3(radi,0,0)); // Per rotar amb el radi corresponent
 
   TG = glm::scale(TG, glm::vec3(escalaModels[CAR]));
